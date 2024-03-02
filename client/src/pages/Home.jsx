@@ -5,23 +5,17 @@ import IconCard from "../../components/IconCard";
 import TextScanner from "../../components/partial/TextScanner";
 import HashLoader from "react-spinners/HashLoader";
 
-
 const Home = () => {
   return (
     <div>
       <Heading type="h2" fontWeight="light">
         THis is custom Heading H1 thin
       </Heading>
-    //   <TextScanner />
+      <TextScanner />
 
       <div className="flex justify-center items-center h-screen">
-        <HashLoader
-          color="#00DB5F"
-          size={60}
-          speedMultiplier={1}
-        />
+        <HashLoader color="#00DB5F" size={60} speedMultiplier={1} />
       </div>
-
     </div>
   );
 };
