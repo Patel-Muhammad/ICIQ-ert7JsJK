@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home.jsx"
+import Home from "./pages/home.jsx"
 import "./App.css"
 import UploadResluts from "./pages/upload_result"
 import Footer from "./component/footer"

@@ -1,16 +1,20 @@
-import React, { useState, useRef } from 'react';
-import Tesseract from 'tesseract.js';
+import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import Tesseract from "tesseract.js";
 const TextScanner = () => {
   const [imageSrc, setImageSrc] = useState(null);
-  const [scannedText, setScannedText] = useState('');
+  const [scannedText, setScannedText] = useState("");
   const videoRef = useRef();
+  const [loading, setLoading] = useState(false); 
+  const [resultData, setResultData] = useState(null); 
+  const navigate = useNavigate();
 
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       videoRef.current.srcObject = stream;
     } catch (error) {
-      console.error('Error accessing webcam:', error);
+      console.error("Error accessing webcam:", error);
     }
   };
 
@@ -24,30 +28,77 @@ const TextScanner = () => {
   };
 
   const takePhoto = () => {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     canvas.width = videoRef.current.videoWidth;
     canvas.height = videoRef.current.videoHeight;
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-    const dataUrl = canvas.toDataURL('image/jpeg');
+    const dataUrl = canvas.toDataURL("image/jpeg");
     setImageSrc(dataUrl);
     stopCamera();
   };
 
-  const handleScanner = () =>{
-    
-  }
+  const handleClick = async () => {
+    try {
+      setLoading(true);
+  
+      const blob = await fetchImageBlob(imageSrc);
+      const response = await sendApiRequest(blob);
+  
+      setResultData(response);
+      console.log(response)
+      navigate("/result", {
+        state: { resultData: response, selectedFile: blob },
+      });
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  const sendApiRequest = async (file) => {
+    const form = new FormData();
+    form.append("image", file, "image.jpg");
+  
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/ocr", {
+        method: "POST",
+        body: form,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      return response.json();
+    } catch (error) {
+      throw new Error(`Error: ${error.message}`);
+    }
+  };
+  
+  
+  
+  const fetchImageBlob = async (url) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return blob;
+  };
+  
 
   const scanImage = () => {
     if (imageSrc) {
-      Tesseract.recognize(imageSrc, 'eng', { logger: (info) => console.log(info) }).then(
-        ({ data: { text } }) => {
-          setScannedText(text);
-          console.log('Text:', scannedText);
-        }
-      );
+      Tesseract.recognize(imageSrc, "eng", {
+        logger: (info) => console.log(info),
+      }).then(({ data: { text } }) => {
+        setScannedText(text);
+        console.log("Text:", scannedText);
+      });
     } else {
-      console.error('No image selected for scanning');
+      console.error("No image selected for scanning");
     }
   };
 
@@ -57,13 +108,18 @@ const TextScanner = () => {
       {imageSrc ? (
         <>
           <img src={imageSrc} alt="Scanned" className="scanned-image" />
-          <button onClick={scanImage} className="scan-button">
+          <button onClick={handleClick} className="scan-button">
             Scan Image
           </button>
         </>
       ) : (
         <>
-          <video ref={videoRef} autoPlay muted className="webcam-preview"></video>
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            className="webcam-preview"
+          ></video>
           <div className="button-div">
             <button onClick={takePhoto} className="photo-button">
               Take Photo
@@ -72,6 +128,11 @@ const TextScanner = () => {
               Start Camera
             </button>
           </div>
+          {loading && (
+            <div className="loader-overlay">
+              <HashLoader color="#36d7b7" />
+            </div>
+          )}
         </>
       )}
     </div>
