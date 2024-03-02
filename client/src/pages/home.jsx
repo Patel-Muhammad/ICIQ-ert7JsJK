@@ -18,7 +18,7 @@ const Home = () => {
     <div className="wrapper">
       <div className="container">
         <CardIcon icon={<TbTextScan2 />} text={"Scan"}  />
-        <CardIcon icon={<MdOutlineFileUpload />} text={"Upload"} myfun={uploadClick}  />
+        <CardIcon icon={<MdOutlineFileUpload />} text={"Upload"}  />
         <CardIcon icon={<GiMedicalPackAlt />} text={"Prescription"} />
         <CardIcon icon={<PiCardsBold />} text={"Detox Guide"} />
       </div>
@@ -44,6 +44,7 @@ const Home = () => {
             head={"Responsible financing"}
             disc={"Smart Choice has developed 3 responsible funding resources."}
           />
+
         </div>
       </div>
       

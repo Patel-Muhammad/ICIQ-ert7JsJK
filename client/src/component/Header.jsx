@@ -23,7 +23,7 @@ function Header() {
                 <Link to="/about">About</Link>
               </li>
               <li className="navbarLink">
-                <Link to="/contact">Contact</Link>
+                <Link to="/scan">Contact</Link>
               </li>
             </ul>
           </div>

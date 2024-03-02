@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TbTextScan2 } from "react-icons/tb";
 import { HashLoader } from "react-spinners";
 
 const CardIcon = ({ icon, text, myfun }) => {
@@ -63,8 +62,13 @@ const CardIcon = ({ icon, text, myfun }) => {
     }
   };
 
+  const scanImage = () => {
+    console.log("hiiii")
+    navigate("/scan");
+  }
+
   return (
-    <div className="card-wrapper" onClick={handleClick}>
+    <div className="card-wrapper" onClick={text === "Scan" ? scanImage : handleClick}>
       <div className="icon-wrapper">{icon}</div>
       <p className="disc">{text}</p>
       {loading && (
