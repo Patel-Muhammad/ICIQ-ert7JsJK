@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TbTextScan2 } from "react-icons/tb";
+import { HashLoader } from "react-spinners";
 
 const CardIcon = ({ icon, text, myfun }) => {
   const navigate = useNavigate();
   const [resultData, setResultData] = useState(null);
+  const [loading, setLoading] = useState(false); // State to track loading status
 
   const handleClick = async () => {
     try {
@@ -19,6 +21,8 @@ const CardIcon = ({ icon, text, myfun }) => {
 
         if (selectedFile) {
           try {
+            setLoading(true); // Set loading to true when starting the API request
+
             const response = await sendApiRequest(selectedFile);
             console.log("API response:", response);
 
@@ -29,6 +33,8 @@ const CardIcon = ({ icon, text, myfun }) => {
             navigate("/result", { state: { resultData: response, selectedFile } });
           } catch (error) {
             console.error('Error:', error);
+          } finally {
+            setLoading(false); // Set loading to false when the API request is completed
           }
         }
       });
@@ -64,6 +70,11 @@ const CardIcon = ({ icon, text, myfun }) => {
     <div className="card-wrapper" onClick={handleClick}>
       <div className="icon-wrapper">{icon}</div>
       <p className="disc">{text}</p>
+      {loading && (
+        <div className="loader-overlay">
+          <HashLoader color="#36d7b7" />
+        </div>
+      )}
     </div>
   );
 };
