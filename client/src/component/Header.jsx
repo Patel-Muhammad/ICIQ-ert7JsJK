@@ -23,9 +23,6 @@ function Header() {
                 <Link to="/about">About</Link>
               </li>
               <li className="navbarLink">
-                <Link to="/services">Services</Link>
-              </li>
-              <li className="navbarLink">
                 <Link to="/contact">Contact</Link>
               </li>
             </ul>
