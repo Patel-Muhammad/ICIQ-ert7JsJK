@@ -17,7 +17,7 @@ function Header() {
           <div className="navbarLinks" id="navbar-sticky">
             <ul className="flexCenter">
               <li className="navbarLink">
-                <Link to="/home">Home</Link>
+                <Link to="/">Home</Link>
               </li>
               <li className="navbarLink">
                 <Link to="/about">About</Link>
