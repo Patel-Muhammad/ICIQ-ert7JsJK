@@ -3,13 +3,14 @@ import Home from "./pages/home"
 import "./App.css"
 import UploadResluts from "./pages/upload_result"
 import Footer from "./component/footer"
+import Header from "./component/Header"
 
 function App() {
  
   return (
     <div className="app">
       <BrowserRouter>
-      
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/result" element={<UploadResluts />} />
