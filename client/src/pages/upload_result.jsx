@@ -31,7 +31,6 @@ const UploadResults = () => {
             <StarRating rating={parseFloat(resultData.overall_rating)} />
           </p>
 
-          {/* Use MatchingIngredientsCard to display matching ingredients */}
           <MatchingIngredientsCard matchingIngredients={resultData.matching_ingredients} />
         </div>
       ) : (

@@ -42,7 +42,7 @@ const Home = () => {
           <ImageCardCom
             img={img3}
             head={"Responsible financing"}
-            disc={"Yuka has developed 3 responsible funding resources."}
+            disc={"Smart Choice has developed 3 responsible funding resources."}
           />
         </div>
       </div>

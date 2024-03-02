@@ -6,35 +6,32 @@ import { HashLoader } from "react-spinners";
 const CardIcon = ({ icon, text, myfun }) => {
   const navigate = useNavigate();
   const [resultData, setResultData] = useState(null);
-  const [loading, setLoading] = useState(false); // State to track loading status
-
+  const [loading, setLoading] = useState(false); 
+  
   const handleClick = async () => {
     try {
-      // Create an input element to trigger file selection
       const inputElement = document.createElement("input");
       inputElement.type = "file";
       inputElement.accept = "image/*";
 
-      // Handle file selection
       inputElement.addEventListener("change", async (event) => {
         const selectedFile = event.target.files[0];
 
         if (selectedFile) {
           try {
-            setLoading(true); // Set loading to true when starting the API request
+            setLoading(true);
 
             const response = await sendApiRequest(selectedFile);
             console.log("API response:", response);
 
-            // Store the result data in state
             setResultData(response);
-
-            // Navigate to the result page with state
-            navigate("/result", { state: { resultData: response, selectedFile } });
+            navigate("/result", {
+              state: { resultData: response, selectedFile },
+            });
           } catch (error) {
-            console.error('Error:', error);
+            console.error("Error:", error);
           } finally {
-            setLoading(false); // Set loading to false when the API request is completed
+            setLoading(false);
           }
         }
       });
@@ -42,17 +39,17 @@ const CardIcon = ({ icon, text, myfun }) => {
       // Trigger the file selection dialog
       inputElement.click();
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
   const sendApiRequest = async (file) => {
     const form = new FormData();
-    form.append('image', file);
+    form.append("image", file);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/ocr', {
-        method: 'POST',
+      const response = await fetch("http://127.0.0.1:5000/api/ocr", {
+        method: "POST",
         body: form,
       });
 
@@ -72,7 +69,7 @@ const CardIcon = ({ icon, text, myfun }) => {
       <p className="disc">{text}</p>
       {loading && (
         <div className="loader-overlay">
-          <HashLoader color="#36d7b7" />
+            <HashLoader color="#36d7b7" />
         </div>
       )}
     </div>
