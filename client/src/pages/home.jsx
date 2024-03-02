@@ -27,9 +27,9 @@ const Home = () => {
         <div className="image-card">
           <ImageCardCom
             img={img1}
-            head={"No influence"}
+            head={"Prioritize your health."}
             disc={
-              "No brand or manufacturer can influence the scores or recommendations offered."
+              "Take charge of your health journey for vitality and longevity"
             }
           />
           <ImageCardCom

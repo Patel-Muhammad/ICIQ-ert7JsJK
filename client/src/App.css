@@ -25,7 +25,12 @@
   justify-content: center;
   background: linear-gradient(45deg, #d4f6ec, #a3e4d7);
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+  transition: all 0.3s ease;
 }
+.card-wrapper:hover {
+  transform: scale(1.05);
+}
+
 .icon-wrapper {
   font-size: 60px;
 }
@@ -196,7 +201,7 @@
   }
 
   a:hover {
-    color: #00bc52;
+    color: #00694c;
   }
 
   a[aria-current='page'] {
