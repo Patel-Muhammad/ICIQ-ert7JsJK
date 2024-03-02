@@ -1,7 +1,7 @@
 import { Menu } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Topbar from "../components/partial/Topbar";
+import Topbar from "../components/partial/topbar";
 import { ICONS } from "../../assets/icons";
 import type { MenuProps } from "antd";
 
@@ -54,20 +54,8 @@ const DashboardLayout = (props: Props) => {
           alt=""
         />
       ),
-      label: "Dashboard",
+      label: "Home",
       path: "/",
-    },
-    {
-      key: "1",
-      icon: (
-        <img
-          src={ICONS.SIDEBAR_DASHBOARD}
-          className="w-[18px] h-[18px]"
-          alt=""
-        />
-      ),
-      label: "Headings",
-      path: "/headings",
     },
     {
       key: "1",

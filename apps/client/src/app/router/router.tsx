@@ -14,7 +14,7 @@ const Router = () => {
 
       {/* Design References */}
       <Route
-        path="/headings"
+        path="/home"
         element={<DashboardLayout children={<Headings />} />}
       />
       <Route
