@@ -1,0 +1,6 @@
+Flask
+easyocr
+opencv-python
+numpy
+Flask-CORS
+gunicorn
