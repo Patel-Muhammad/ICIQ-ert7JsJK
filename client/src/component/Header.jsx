@@ -10,7 +10,7 @@ function Header() {
           <div className="navbarButtons">
             <div className="logo">
               <Link to="/" className="navbarLink">
-                <img height={60} src="/Image/logo.png" alt="scan" />
+                <img className='img-logo' src="/Image/logo.png" alt="scan" />
               </Link>
             </div>
           </div>
