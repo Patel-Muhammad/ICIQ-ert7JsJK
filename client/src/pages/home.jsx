@@ -1,14 +1,55 @@
-import React from 'react'
-import CardIcon from '../component/cardIcon.jsx'
+import React from "react";
+import CardIcon from "../component/cardIcon.jsx";
 import { TbTextScan2 } from "react-icons/tb";
-
+import { MdOutlineFileUpload } from "react-icons/md";
+import { GiMedicalPackAlt } from "react-icons/gi";
+import { PiCardsBold } from "react-icons/pi";
+import ImageCardCom from "../component/image_card.jsx";
+import img1 from "../assets/img1.png";
+import img2 from "../assets/img2.png";
+import img3 from "../assets/img3.png";
 
 const Home = () => {
-  return (
-    <div className='container'>
-        <CardIcon icon={<TbTextScan2 />} text={"Scan"} />
-    </div>
-  )
-}
 
-export default Home
+  const uploadClick = () => {
+    console.log("Hiiiiii")
+  }
+
+  return (
+    <div className="wrapper">
+      <div className="container">
+        <CardIcon icon={<TbTextScan2 />} text={"Scan"}  />
+        <CardIcon icon={<MdOutlineFileUpload />} text={"Upload"} myfun={uploadClick}  />
+        <CardIcon icon={<GiMedicalPackAlt />} text={"Prescription"} />
+        <CardIcon icon={<PiCardsBold />} text={"Detox Guide"} />
+      </div>
+      <div className="independent">
+        <p className="h2-tag">Empowering Healthier lives, One Scan at a Time</p>
+        <div className="image-card">
+          <ImageCardCom
+            img={img1}
+            head={"No influence"}
+            disc={
+              "No brand or manufacturer can influence the scores or recommendations offered."
+            }
+          />
+          <ImageCardCom
+            img={img2}
+            head={"No ads"}
+            disc={
+              "Brands cannot pay Yuka to advertise their products on the app."
+            }
+          />
+          <ImageCardCom
+            img={img3}
+            head={"Responsible financing"}
+            disc={"Yuka has developed 3 responsible funding resources."}
+          />
+        </div>
+      </div>
+      
+    </div>
+  );
+};
+
+export default Home;
