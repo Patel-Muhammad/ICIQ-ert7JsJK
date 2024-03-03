@@ -371,3 +371,6 @@ a {
   object-fit: contain;
   height: 400px;
 }
+.photo-button{
+  margin-right: 20px;
+}
