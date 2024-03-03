@@ -57,6 +57,31 @@ def ocr():
 
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+
+@app.route('/api/text_match', methods=['POST'])
+def text_match():
+    try:
+        text = request.json.get('text', '')
+
+        text_words = extract_words(text)
+
+        matching_ingredients = []
+        for ingredient in ingredient_data["ingredients"]:
+            ingredient_tokens = extract_words(ingredient["name"])
+            if any(token in text_words for token in ingredient_tokens):
+                matching_ingredients.append(ingredient)
+
+        matching_ingredients = list({ingredient["name"]: ingredient for ingredient in matching_ingredients}.values())
+
+        overall_rating = calculate_overall_rating(matching_ingredients)
+
+        response_data = {"text": text, "matching_ingredients": matching_ingredients, "overall_rating": overall_rating}
+        
+        return jsonify(response_data)
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)
